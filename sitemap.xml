@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/</loc>
+    <lastmod>2019-06-04T20:05:05+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/posts/my-first-post/</loc>
+    <lastmod>2019-06-04T20:05:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/posts/</loc>
+    <lastmod>2019-06-04T20:05:05+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/sqlopt/</loc>
+    <lastmod>2019-06-04T20:05:05+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%961/</loc>
+    <lastmod>2019-06-04T20:05:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%962/</loc>
+    <lastmod>2019-06-04T20:05:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%963/</loc>
+    <lastmod>2019-06-04T20:05:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%964/</loc>
+    <lastmod>2019-06-04T20:05:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%965/</loc>
+    <lastmod>2019-06-04T20:05:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/mjczz/sqldoc/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

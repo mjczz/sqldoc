@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Edidor Demo</title>
+    <link>https://github.com/mjczz/sqldoc/posts/</link>
+    <description>Recent content in Posts on Edidor Demo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 04 Jun 2019 20:05:05 +0800</lastBuildDate>
+    
+	<atom:link href="https://github.com/mjczz/sqldoc/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My First Post</title>
+      <link>https://github.com/mjczz/sqldoc/posts/my-first-post/</link>
+      <pubDate>Tue, 04 Jun 2019 20:05:05 +0800</pubDate>
+      
+      <guid>https://github.com/mjczz/sqldoc/posts/my-first-post/</guid>
+      <description>这是我的第一篇文章 这是我的第一篇文章 这是我的第一篇文章 这是我的第一篇文章 这是我的第一篇文章 这是我的第一篇文章 这是我的第一篇文章</description>
+    </item>
+    
+  </channel>
+</rss>

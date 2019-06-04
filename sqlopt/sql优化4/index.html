@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    
+    <link rel="canonical" href="https://github.com/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%964/" />
+    <meta name="description" content="A hugo site using Edidor. &lt;br/&gt;&lt;br/&gt; Ctrl&#43;B toggle sidebar. ">
+    
+
+    <title>sql优化4 &middot; Edidor Demo</title>
+
+    <link rel="shortcut icon" href="https://github.com/mjczz/sqldoc/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://github.com/mjczz/sqldoc/css/main.css" />
+    
+        
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-light.min.css">
+        
+    
+    
+    
+</head>
+
+
+<body class="loading light-mode">
+    
+<div class="top">
+    <img class="logo" src="https://github.com/mjczz/sqldoc/images/logo.svg" alt="logo" />
+</div>
+<div class="bottom">
+    <img class="logo" src="https://github.com/mjczz/sqldoc/images/logo.svg" alt="logo" />
+</div>
+
+    <header class="header">
+    <ul class="menu clearfix control">
+        
+
+<li class="logo-container logo-default">
+    <a href="https://github.com/mjczz/sqldoc/" class="btn logo-link">
+        <img class="logo" src="https://github.com/mjczz/sqldoc/images/logo.svg" alt="logo" />
+    </a>
+</li>
+
+        
+        
+        
+        <li>
+            <a href="/mjczz/sqldoc/" class="btn">
+                首页
+            </a>
+        </li>
+        
+        
+        
+        <li>
+            <a href="/mjczz/sqldoc/sqlopt" class="btn">
+                sql优化
+            </a>
+        </li>
+        
+        
+        
+        <li>
+            <a href="/mjczz/sqldoc/posts" class="btn">
+                文章
+            </a>
+        </li>
+        
+        
+        
+        
+        <li 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                侧边栏
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="#"
+                    
+                        class="btn toggle-sidebar"
+                    >切换</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+        
+        
+        <li  id="theme-switcher" 
+            class="">
+            <a class="btn" id="theme-switcher-button">
+                Theme
+            </a>
+            <ul class="sub-menu control">
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="light" class="btn"
+                        
+                    >Light</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="dark" class="btn"
+                        
+                    >Dark</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        data-theme="wild" class="btn"
+                        
+                    >Wild</a>
+                </li>
+                
+                <li class="">
+                    <a href="#"
+                    
+                        
+                        class="export-wild btn"
+                        
+                    >Export Wild Style</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        
+    </ul>
+</header>
+
+    <div class="middle">
+        <nav class="sidebar">
+            <ul class="posts control">
+    
+    <li><a class="no-break btn" href='/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%965/'><i class="icon icon-post"></i>sql优化5</a></li>
+    
+    <li><a class="no-break btn" href='/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%964/'><i class="icon icon-post"></i>sql优化4</a></li>
+    
+    <li><a class="no-break btn" href='/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%963/'><i class="icon icon-post"></i>sql优化3</a></li>
+    
+    <li><a class="no-break btn" href='/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%962/'><i class="icon icon-post"></i>sql优化2</a></li>
+    
+    <li><a class="no-break btn" href='/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%961/'><i class="icon icon-post"></i>sql优化1</a></li>
+    
+</ul>
+
+        </nav>
+        <main class="main">
+            <article class="article">
+    <h2 class="title"><a href='/mjczz/sqldoc/sqlopt/sql%E4%BC%98%E5%8C%964/' class="btn">sql优化4</a></h2>
+    <div class="article-meta clearfix">
+        <ul class="dates clearfix left control">
+            <li><i class="icon icon-date"></i></li>
+            <li class="publish-date">
+                <time datetime="2019.06.04">2019.06.04</time>
+            </li>
+        </ul>
+        
+        
+    </div>
+    <div class="content">
+        
+        
+
+<h3 id="业务场景">业务场景</h3>
+
+<p>class_out列表</p>
+
+<h3 id="原sql">原sql</h3>
+
+<pre><code class="language-sql">SELECT s.student_name,s.student_code,s.parent_mobile,s.school,s.grade AS student_grade,co.*,na.realname,na.is_part,nl.lesson_id,
+	                   nl.lesson_tag,nl.lesson_subject,nl.lesson_grade,nl.lesson_mode,nl.lesson_mode2,nl.lesson_type,
+	                   nl.standard_group,nl.special_course,nl.unit_time,nl.lesson_name,nl.lesson_price
+FROM nice_student_class_out AS co
+LEFT JOIN nice_lesson AS nl ON co.lesson_id=nl.lesson_id
+LEFT JOIN nice_student AS s ON co.student_id=s.student_id
+LEFT JOIN nice_admin AS na ON na.userid=co.class_teacher_id
+WHERE co.class_out_id &gt; 0 AND co.class_status &lt; '4' AND co.city ='1' AND co.class_campus ='108' AND co.ymd != 20171212 
+</code></pre>
+
+<h3 id="查询计划分析">查询计划分析</h3>
+
+<pre><code class="language-sql">Limit  (cost=79694.65..79694.68 rows=10 width=578) (actual time=413.670..413.676 rows=10 loops=1)
+  -&gt;  Sort  (cost=79694.65..79697.25 rows=1037 width=578) (actual time=413.668..413.672 rows=10 loops=1)
+        Sort Key: co.class_begin, co.class_out_id
+        Sort Method: top-N heapsort  Memory: 30kB
+        -&gt;  Hash Left Join  (cost=3160.03..79672.24 rows=1037 width=578) (actual time=44.820..412.185 rows=923 loops=1)
+              Hash Cond: (co.class_teacher_id = na.userid)
+              -&gt;  Hash Left Join  (cost=2796.44..79294.40 rows=1037 width=567) (actual time=41.756..408.527 rows=923 loops=1)
+                    Hash Cond: (co.student_id = s.student_id)
+                    -&gt;  Hash Left Join  (cost=1046.38..77530.08 rows=1037 width=525) (actual time=19.509..385.472 rows=923 loops=1)
+                          Hash Cond: (co.lesson_id = nl.lesson_id)
+                          -&gt;  Seq Scan on nice_student_class_out co  (cost=0.00..76469.44 rows=1037 width=433) (actual time=0.741..365.736 rows=923 loops=1)
+                                Filter: ((class_out_id &gt; 0) AND (class_status &lt; '4'::smallint) AND (ymd &lt;&gt; 20171212) AND (city = '1'::smallint) AND (class_campus = '108'::smallint))
+                                Rows Removed by Filter: 935973
+                          -&gt;  Hash  (cost=782.28..782.28 rows=21128 width=92) (actual time=18.589..18.589 rows=21128 loops=1)
+                                Buckets: 32768  Batches: 1  Memory Usage: 2867kB
+                                -&gt;  Seq Scan on nice_lesson nl  (cost=0.00..782.28 rows=21128 width=92) (actual time=0.007..9.764 rows=21128 loops=1)
+                    -&gt;  Hash  (cost=1377.25..1377.25 rows=29825 width=46) (actual time=22.076..22.076 rows=29825 loops=1)
+                          Buckets: 32768  Batches: 1  Memory Usage: 2654kB
+                          -&gt;  Seq Scan on nice_student s  (cost=0.00..1377.25 rows=29825 width=46) (actual time=0.007..11.085 rows=29825 loops=1)
+              -&gt;  Hash  (cost=313.26..313.26 rows=4026 width=15) (actual time=3.031..3.031 rows=4026 loops=1)
+                    Buckets: 4096  Batches: 1  Memory Usage: 223kB
+                    -&gt;  Seq Scan on nice_admin na  (cost=0.00..313.26 rows=4026 width=15) (actual time=0.009..2.059 rows=4026 loops=1)
+
+Planning time: 0.815 ms
+Execution time: 413.941 ms
+</code></pre>
+
+<h3 id="根据查询计划分析出">根据查询计划分析出</h3>
+
+<p>1. 搜索条件顺序问题</p>
+
+<h3 id="优化后的sql">优化后的sql</h3>
+
+<pre><code class="language-sql">SELECT s.student_name,s.student_code,s.parent_mobile,s.school,s.grade AS student_grade,co.*,na.realname,na.is_part,nl.lesson_id,
+	                   nl.lesson_tag,nl.lesson_subject,nl.lesson_grade,nl.lesson_mode,nl.lesson_mode2,nl.lesson_type,
+	                   nl.standard_group,nl.special_course,nl.unit_time,nl.lesson_name,nl.lesson_price
+FROM nice_student_class_out AS co
+LEFT JOIN nice_lesson AS nl ON co.lesson_id=nl.lesson_id
+LEFT JOIN nice_student AS s ON co.student_id=s.student_id
+LEFT JOIN nice_admin AS na ON na.userid=co.class_teacher_id
+WHERE   co.city ='1' AND co.class_campus ='108' AND co.class_status &lt; '4' AND  co.ymd != 20171212 
+</code></pre>
+
+<h3 id="优化后的sql查询计划分析">优化后的sql查询计划分析</h3>
+
+<pre><code class="language-sql">Hash Left Join  (cost=3160.03..77333.08 rows=1037 width=578) (actual time=56.142..375.398 rows=923 loops=1)
+  Hash Cond: (co.class_teacher_id = na.userid)
+  -&gt;  Hash Left Join  (cost=2796.44..76955.24 rows=1037 width=567) (actual time=51.096..369.664 rows=923 loops=1)
+        Hash Cond: (co.student_id = s.student_id)
+        -&gt;  Hash Left Join  (cost=1046.38..75190.92 rows=1037 width=525) (actual time=21.607..339.337 rows=923 loops=1)
+              Hash Cond: (co.lesson_id = nl.lesson_id)
+              -&gt;  Seq Scan on nice_student_class_out co  (cost=0.00..74130.28 rows=1037 width=433) (actual time=0.600..317.289 rows=923 loops=1)
+                    Filter: ((class_status &lt; '4'::smallint) AND (ymd &lt;&gt; 20171212) AND (city = '1'::smallint) AND (class_campus = '108'::smallint))
+                    Rows Removed by Filter: 935973
+              -&gt;  Hash  (cost=782.28..782.28 rows=21128 width=92) (actual time=20.819..20.819 rows=21128 loops=1)
+                    Buckets: 32768  Batches: 1  Memory Usage: 2867kB
+                    -&gt;  Seq Scan on nice_lesson nl  (cost=0.00..782.28 rows=21128 width=92) (actual time=0.009..10.822 rows=21128 loops=1)
+        -&gt;  Hash  (cost=1377.25..1377.25 rows=29825 width=46) (actual time=29.308..29.308 rows=29825 loops=1)
+              Buckets: 32768  Batches: 1  Memory Usage: 2654kB
+              -&gt;  Seq Scan on nice_student s  (cost=0.00..1377.25 rows=29825 width=46) (actual time=0.009..14.955 rows=29825 loops=1)
+  -&gt;  Hash  (cost=313.26..313.26 rows=4026 width=15) (actual time=5.000..5.000 rows=4026 loops=1)
+        Buckets: 4096  Batches: 1  Memory Usage: 223kB
+        -&gt;  Seq Scan on nice_admin na  (cost=0.00..313.26 rows=4026 width=15) (actual time=0.014..3.452 rows=4026 loops=1)
+Planning time: 0.709 ms
+Execution time: 375.674 ms
+</code></pre>
+
+<h3 id="结论-效率提升50ms左右">结论，效率提升50ms左右</h3>
+
+        
+    </div>
+
+</article>
+<section class="comment">
+    <p class="local-info">
+        Comment is disabled to avoid unwanted discussions from 'localhost:1313' on your Disqus
+        account...
+    </p>
+    <div id="disqus_thread"></div>
+</section>
+<script type="text/javascript">
+
+    (function () {
+        if (window.location.hostname == "localhost") {
+            return
+        }
+        document.querySelector('.local-info').classList.add('hide')
+
+        let dsq = document.createElement('script')
+        dsq.type = 'text/javascript'
+        dsq.async = true
+        let disqus_shortname = 'mjczz'
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+    })()
+</script>
+
+
+        </main>
+    </div>
+    <footer class="footer clearfix">
+    <ul class="control social clearfix">
+        <li><a class="author btn" href="#">Ziox</a></li>
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon behance"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon email"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon facebook"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon github"></i></a>
+        </li>
+        
+        
+        
+        <li>
+            <a class="icon-link btn" href="%20"><i class="icon twitter"></i></a>
+        </li>
+        
+        
+        <li>
+            <a class="icon-link btn" href="https://github.com/mjczz/sqldoc/index.xml" type="application/rss+xml" title="rss">
+                <i class="rss icon"></i></a>
+        </li>
+    </ul>
+
+    <ul class="control status clearfix">
+        <li><a href="#" class="btn">Posts:
+                2</a>
+        </li>
+        <li><a href="#" class="btn">Pages:
+                0</a></li>
+        <li><a href="#" class="btn">en</a></li>
+        <li><a href="https://gohugo.io" class="btn">Hugo, 0.55.6</a></li>
+        <li><a href="https://github.com/jacobsun/edidor" class="btn">主题: Edidor</a></li>
+        <li>
+            
+                <a href="#" class="btn">Last build: <time
+                    datetime="2019-05-18">2019-05-18</time>
+                </a>
+            
+        </li>
+    </ul>
+</footer>
+<div class="dialog">
+    <div class="wrapper">
+        <div class="clearfix"><button class="btn close-dialog">X</button></div>
+        <header>
+            <h1 class="title">Theme Name</h1>
+        </header>
+        <main>
+            <div class="clearfix">
+                <label for="theme-name">
+                    <p>Only English Character, space, hyphen are allowed!</p>
+                    <p>Valid name examples: "custom", "fantastic theme", "my-theme"</p>
+                    <p>Invalid name examles: "我的主题", ":)", "123"</p>
+                </label>
+                <input type="text" name="theme-name" id="theme-name">
+            </div>
+            <div class="clearfix">
+                <button class="btn export">Export</button>
+            </div>
+
+        </main>
+        <footer></footer>
+    </div>
+</div>
+
+    <script src="https://github.com/mjczz/sqldoc/js/main.js"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'your ga id', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</body>
+
+</html>
